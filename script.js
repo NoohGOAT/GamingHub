@@ -10,16 +10,12 @@ document.getElementById('search-button').addEventListener('click', () => {
     const query = document.getElementById('game-search').value.toLowerCase();
     const games = document.querySelectorAll('.game-button');
 
-    let found = false;
     games.forEach(game => {
         const gameName = game.dataset.game.toLowerCase();
-        if (gameName.includes(query)) {
-            game.style.display = 'inline-block';
-            found = true;
-        } else {
-            game.style.display = 'none';
-        }
+        game.style.display = gameName.includes(query) ? 'inline-block' : 'none';
     });
 
-    if (!found) alert('No games found. Check your spelling!');
+    if (![...games].some(game => game.style.display === 'inline-block')) {
+        alert('No games found. Try checking your spelling!');
+    }
 });
